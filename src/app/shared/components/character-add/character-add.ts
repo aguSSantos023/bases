@@ -1,46 +1,37 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
-import { Dragonball } from '../../services/dragonball';
-
-interface Character {
-  id: number;
-  name: string;
-  power: number
-}
+import { Component, input, output, signal, WritableSignal } from '@angular/core';
+import { Character } from '../../../interface/character';
 
 @Component({
-  selector: 'app-dragonball-page',
+  selector: 'dragonball-character-add',
   imports: [],
-  templateUrl: './dragonball-page.html',
+  templateUrl: './character-add.html',
 })
-export class DragonballPage {
-
+export class CharacterAdd {
   public name: WritableSignal<string> = signal('')
   public power: WritableSignal<number> = signal(0)
 
-  dragonballService = inject(Dragonball)
+  characters = input.required<Character[]>()
 
-
+  newCharacter = output<Character>();
 
   /**
    * addCharacter
    */
   public addCharacter() {
-    console.log(this.name(), this.power());
 
     if (!this.name() || !this.power()) return
     console.log(this.name(), this.power());
 
 
     const newCharacter: Character = {
-      id: this.dragonballService.characters().length + 1,
+      id: Math.floor(Math.random() * 1000),
       name: this.name(),
       power: this.power()
     }
 
-    this.dragonballService.addCharacter(newCharacter)
+    this.newCharacter.emit(newCharacter)
 
     this.resetFiels()
-
   }
 
   /**

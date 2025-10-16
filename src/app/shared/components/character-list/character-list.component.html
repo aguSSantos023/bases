@@ -1,0 +1,13 @@
+<h3>{{ listName() || 'Listado' }}</h3>
+<ul>
+  @for (character of characters(); track character.id; let idx = $index) {
+  @if (character.power > 500) {
+  <li>
+    <span>{{ idx + 1 }} - {{ character.name }}</span>
+    <strong [style.color]=" character.power > 9000 ? 'red' : '' ">({{ character.power }})</strong>
+  </li>
+  }@else {
+  <li>No hay nadie</li>
+  }
+  }
+</ul>
