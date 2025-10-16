@@ -1,9 +1,9 @@
-import { TitleCasePipe } from '@angular/common';
-import { Component, signal, WritableSignal } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
+import { Component, computed, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'app-hero-page',
-  imports: [TitleCasePipe],
+  imports: [UpperCasePipe],
   templateUrl: './hero-page.html',
 })
 export class HeroPage {
@@ -11,16 +11,14 @@ export class HeroPage {
   protected readonly name: WritableSignal<string> = signal('ironman')
   protected readonly age: WritableSignal<number> = signal(45)
 
+  heroDescription = computed(() => {
+    const description = `${ this.name() } - ${ this.age() }`
+    return description
+  })
+
+  capitalizedName = computed(() => this.name().toUpperCase())
 
 
-  /**
-   * getHeroDescription
-   */
-  public getHeroDescription(): string {
-
-    return `${ this.name() } - ${ this.age() }`
-
-  }
 
   /**
    * changeHero

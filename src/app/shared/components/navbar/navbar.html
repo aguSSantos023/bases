@@ -1,0 +1,26 @@
+<style>
+  .active{
+    text-decoration: none;
+    color: red;
+    font-weight: bold;
+  }
+</style>
+
+<nav style="display: flex; justify-content: space-around;">
+  <a
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true}">
+    Counter
+  </a>
+  <a
+    [routerLink]="['/hero']"
+    [routerLinkActive]="'active'">
+    Hero
+  </a>
+  <a
+    [routerLink]="['/dragonball']"
+    [routerLinkActive]="'active'">
+    Dragonball
+  </a>
+</nav>
